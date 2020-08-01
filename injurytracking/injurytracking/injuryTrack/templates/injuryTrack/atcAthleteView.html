@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<body>
+  <a class="btn btn-secondary" style="margin: 15 0 0 15;" href="{{atc.link}}">Back to home </a>
+  <h1 style="text-align:center; margin: 15 auto 15 auto;"">
+    {{athlete.user.first_name}} {{athlete.user.last_name}}'s Details</h1>
+
+	<div class="container">
+		<div class="row">
+			<div class='col-sm'>
+				<h2 class="border-bottom" style="max-width:450px; margin-top:15px">Athlete Info</h2>
+				<ul style="list-style: none;">
+          <li>Name: {{athlete.fullname}}</li>
+					<li>Sport: {{athlete.sport}}</li>
+					<li>DOB:</li>
+					<li>Phone Number: {{athlete.phone}}</li>
+					<li>Emergency Contact: {{athlete.emergency_contact}}</li>
+				</ul>
+        <h2 class="border-bottom" style="max-width:450px; margin-top:15px">Exercises</h2>
+				<form method="post" action="complete/">
+					<ul style="list-style: none;">
+                {% for exercise in exerciseList %}
+                {% if not exercise.completedOn %}
+                <li>
+                <input type="checkbox" name="exercise" value={{exercise.id}}>
+  							{{exercise.name}} <br />
+  							Sets: {{exercise.sets}} Reps: {{exercise.reps}}
+
+                </li>
+                {% endif %}
+                {% endfor %}
+
+					</ul>
+          {% if exerciseList %}
+          <button class="btn btn-primary btn-sm" name="btn-complete">Complete Selected</button>
+          {% endif %}
+			 </form>
+       {% if injuryList %}
+        <a class="btn btn-success" href={{athlete.newExerciseLink}}>+ Add new exercise</a>
+        {% endif %}
+
+        <h2 class="border-bottom" style="max-width:450px; margin-top:15px">Recently Completed Exercises</h2>
+        <ul style="list-style: none;">
+        {% for exercise in recentExercise %}
+        <li>
+            Name: {{exercise.name}}
+            <br />
+            Completed: {{exercise.completedOn}}
+          <li>
+            {% endfor %}
+        </ul>
+
+			</div>
+			<div class='col-sm'>
+				<h2 class="border-bottom" style="max-width:450px; margin-top:15px">Injuries</h2>
+				<ul style="list-style: none;">
+					{% for injury in injuryList %}
+          {% if injury.removedOn == null %}
+          <form method="post">
+					<li>
+            <h4>{{injury.name}}</h4>
+              Injury Date: {{injury.addedOn}}
+              <br />
+							Description: {{injury.description}}
+              <br />
+              <a class="btn btn-primary btn-sm" href={{injury.link}}>Edit Injury</a>
+              <button class="btn btn-primary btn-sm" name="btn-resolve" value="{{injury.id}}">Resolve Injury</button> <!--Add link to delete/take out of list-->
+					</li>
+          </form>
+          {% endif %}
+					{% endfor %}
+				</ul>
+        <a class="btn btn-success" href={{athlete.newInjuryLink}}>+ Add new injury</a> <!--Add link to creates new injury-->
+        <h2 class="border-bottom" style="max-width:450px; margin-top:15px">Injury History</h2>
+        <ul style="list-style: none;">
+          {% for injury in injuryHistory %}
+          {% if injury.removedOn != null %}
+          <li>
+              <h4>{{injury.name}}</h4>
+							Description: {{injury.description}}
+              <br />
+              Resolved On: {{injury.removedOn}}
+					</li>
+          {% endif %}
+          {% endfor %}
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>

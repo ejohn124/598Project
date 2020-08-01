@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<body style="margin:15 15 15 15">
+  <h1 style="text-align:center; margin: 0 200 15 200;" class="border-bottom">Injury Details</h1>
+  <div class="form-group">
+    <form method="post">
+      <h4>Injury Name:</h4>
+      <input class ="form-control" type="text" name="injuryName" value="{{injury.name}}" style="max-width:400px">
+      <h4>Date of Injury:</h4>
+      <input class ="form-control" type="date" name="injuryDate" value="{{injury.addedOn}}" style="max-width:400px">
+      <h4>Description:</h4>
+      <textarea class ="form-control" name="injuryDescription" rows="8" cols="80" style="max-width:550px">{{injury.description}}</textarea>
+      {% if injury.updatedOn != null %}
+      <label>Last Updated On: {{injury.updatedOn}}</label>
+      {% endif %}
+      <br />
+      <button name="btn-post" value="btn-submit" class="btn btn-light" style="margin-top:10px;">Submit</button>
+      <button name="btn-post" value="btn-cancel" class="btn btn-light" style="margin-top:10px;">Cancel</button>
+    </form>
+    </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
